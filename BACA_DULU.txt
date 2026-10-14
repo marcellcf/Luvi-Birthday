@@ -1,0 +1,38 @@
+LUVI'S BIRTHDAY QUEST
+=====================
+
+ISI FOLDER
+  app.py            -> semua teks & foto yang bisa diganti (bagian KONFIGURASI)
+  game.html         -> game-nya (nggak perlu diubah)
+  foto/             -> foto kartu gacha + foto ending
+  .streamlit/       -> setelan warna (biarin aja)
+  requirements.txt  -> buat deploy online
+
+
+1) JALANIN DI LAPTOP
+   Buka terminal di folder ini, lalu:
+       pip install streamlit
+       streamlit run app.py
+   Klik layar game-nya sekali biar keyboard kebaca, dan nyalain suara ya.
+
+   Kontrol:  Panah / WASD = gerak    Z / Spasi = A    X = B
+             Enter = START (buka tas)    M = suara on/off
+   Di HP: pakai tombol-tombol di konsolnya.
+
+2) GANTI ISI
+   Buka app.py, bagian KONFIGURASI:
+     - NPC               : nama & ucapan Jessica dan Adek
+     - PESAN_ANAK_AYAM   : 4 ucapan dari anak ayam
+     - KARTU_GACHA       : 4 kartu (judul, teks, foto). Kartu terakhir harus "legendary"
+     - FOTO_AKHIR        : foto di ending
+     - SURAT             : surat penutup
+
+3) GANTI / TAMBAH FOTO
+   Taruh foto (JPG/PNG) di folder "foto", lalu tulis nama filenya di KARTU_GACHA
+   atau FOTO_AKHIR. Foto iPhone (HEIC) convert dulu ke JPG.
+
+4) BIAR BISA DIBUKA LUVI LEWAT LINK (gratis)
+   a. Upload folder ini ke GitHub (pakai repo private kalau fotonya mau aman).
+   b. Buka https://share.streamlit.io lalu login pakai akun GitHub.
+   c. "Create app" -> pilih repo-nya -> file utama: app.py -> Deploy.
+   d. Kirim link-nya ke Luvi. Catatan: siapa pun yang punya link bisa membukanya.
