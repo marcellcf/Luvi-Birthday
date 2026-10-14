@@ -125,6 +125,9 @@ def photo_uri(rel_path):
         return None
     p = APP_DIR / rel_path
     if not p.is_file():
+        # fallback: foto diupload langsung di folder utama (tanpa folder "foto/")
+        p = APP_DIR / Path(rel_path).name
+    if not p.is_file():
         return None
     try:
         return _encode_photo(str(p), p.stat().st_mtime)
