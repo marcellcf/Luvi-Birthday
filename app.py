@@ -169,8 +169,9 @@ PAGE_CSS = """
 .stApp{background:#1a1230}
 header[data-testid="stHeader"]{background:transparent;height:0}
 #MainMenu, footer, [data-testid="stToolbar"], [data-testid="stDecoration"]{visibility:hidden}
-.block-container{padding-top:1rem;padding-bottom:0;max-width:980px}
-iframe{border:none}
+.block-container{padding:6px 0 0 !important;max-width:1100px}
+/* bikin area game setinggi layar (HP & laptop) */
+.stApp iframe{border:none;height:calc(100vh - 12px) !important;height:calc(100dvh - 12px) !important;min-height:480px}
 </style>
 """
 
