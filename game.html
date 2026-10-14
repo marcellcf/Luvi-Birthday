@@ -25,12 +25,10 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
   grid-template-areas:"bezel bezel" "dpad ab" "ss ss";gap:12px 8px;padding:12px 12px 16px;background:var(--shell);
   border-radius:16px 16px 48px 16px;
   box-shadow:inset -5px -6px 0 var(--shell-d),inset 5px 5px 0 var(--shell-l),0 10px 0 var(--shell-dd),0 24px 40px rgba(0,0,0,.45)}
-@media (min-width:700px){
-  #device{grid-template-columns:150px 1fr 150px;grid-template-areas:"dpad bezel ab" ". ss .";border-radius:46px;
-    padding:16px 18px 12px;gap:10px 14px;align-items:center}
-}
+#device.land{grid-template-columns:150px 1fr 150px;grid-template-areas:"dpad bezel ab" ". ss .";border-radius:46px;
+  padding:16px 18px 12px;gap:10px 14px;align-items:center}
 #bezel{grid-area:bezel;background:var(--bezel);padding:8px 12px 7px;border-radius:10px 10px 30px 10px;box-shadow:inset 0 0 0 2px #17121f}
-@media (min-width:700px){#bezel{border-radius:14px}}
+#device.land #bezel{border-radius:14px}
 .bezel-top{display:flex;align-items:center;gap:6px;font-family:var(--px);font-size:6px;color:#8f86a8;margin:0 0 6px 2px;letter-spacing:.5px}
 .led{width:7px;height:7px;border-radius:50%;background:#ff3b6b;box-shadow:0 0 6px #ff3b6b}
 #screen{position:relative;width:100%;aspect-ratio:4/3;background:#0e0b16;overflow:hidden;container-type:inline-size}
@@ -61,15 +59,33 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
 .pill span{display:block;width:44px;height:12px;border-radius:8px;background:#8a6a85;box-shadow:inset 0 -3px 0 #5d4559;transform:rotate(-20deg)}
 .pill.on span{box-shadow:none;transform:rotate(-20deg) translateY(2px)}
 button:focus-visible{outline:3px solid #29adff;outline-offset:3px}
+/* ---- mode HP (konsol berdiri): HUD di atas layar, dialog di panel bawah layar, tombol lebih gede ---- */
+#hudSlot,#panel{display:none}
+#device:not(.land) #hudSlot{display:block;min-height:24px;margin:0 0 7px;container-type:inline-size}
+#device:not(.land) #hudSlot #hud{position:static;padding:0;font-size:clamp(7px,2.5cqw,11px)}
+#device:not(.land) #panel{display:block;position:relative;height:150px;margin-top:12px;container-type:inline-size}
+#device.compact #panel{height:124px;margin-top:10px}
+#panelHint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 16px;
+  font-family:var(--px);font-size:8px;line-height:1.8;color:#6f6690}
+#panel #dialog{position:absolute;left:9px;right:9px;top:9px;bottom:9px;min-height:0;font-size:clamp(16px,5.8cqw,26px);padding:12px 14px 14px}
+#panel #dlgName{left:8px;top:-9px}
+#panel #menu{position:absolute;right:9px;top:9px;bottom:9px;width:52%;min-height:0;font-size:clamp(8px,2.9cqw,12px);gap:16px 6px;padding:12px 10px}
+#panel #dialog.withmenu{padding-right:56%}
+#device:not(.land):not(.compact) #dpad{width:156px;height:156px}
+#device:not(.land):not(.compact) #dpad button,#device:not(.land):not(.compact) #dpad .mid{width:52px;height:52px;font-size:15px}
+#device:not(.land):not(.compact) #dpad .up,#device:not(.land):not(.compact) #dpad .down,#device:not(.land):not(.compact) #dpad .mid{left:52px}
+#device:not(.land):not(.compact) #dpad .left,#device:not(.land):not(.compact) #dpad .right,#device:not(.land):not(.compact) #dpad .mid{top:52px}
+#device:not(.land):not(.compact) #ab{width:160px;height:126px}
+#device:not(.land):not(.compact) .rbtn{width:68px;height:68px;font-size:16px}
+#device:not(.land):not(.compact) .pill span{width:52px;height:14px}
 #kb{font-family:var(--px);font-size:8px;color:#8f86a8;text-align:center;line-height:1.7;padding:0 8px}
-@media (max-width:699px){#kb{display:none}}
 
 /* ---------- on-screen UI ---------- */
 #hud{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;
-  padding:2.4cqw 2.6cqw;pointer-events:none;font-family:var(--px);font-size:clamp(6px,2.1cqw,11px);z-index:4}
+  padding:2.4cqw 2.6cqw;pointer-events:none;font-family:var(--px);font-size:clamp(5px,1.8cqw,10px);z-index:4;white-space:nowrap}
 .chip{background:rgba(29,43,83,.88);color:#fff1e8;padding:1.4cqw 1.8cqw;line-height:1.4;
   box-shadow:0 0 0 2px #fff1e8,0 0 0 4px rgba(29,43,83,.88)}
-#hudGoal{max-width:62%;text-align:right}
+#hudGoal{text-align:right}
 #title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding-top:8cqw;
   text-align:center;pointer-events:none;font-family:var(--px);z-index:3}
 #title .t1{font-size:3.6cqw;color:#fff1e8;text-shadow:.5cqw .5cqw 0 #7e2553}
@@ -162,6 +178,7 @@ button:focus-visible{outline:3px solid #29adff;outline-offset:3px}
 <div id="device">
   <div id="bezel">
     <div class="bezel-top"><span class="led"></span>BATTERY · HAPPY</div>
+    <div id="hudSlot"></div>
     <div id="screen">
       <canvas id="cv" width="256" height="192"></canvas>
       <div id="hud" class="hide"><span class="chip" id="hudCoin"></span><span class="chip" id="hudGoal"></span></div>
@@ -175,7 +192,8 @@ button:focus-visible{outline:3px solid #29adff;outline-offset:3px}
       <div id="flash"></div>
       <div id="fade"></div>
     </div>
-    <div class="brand"><b>LUVI</b> BOY<i>EDISI 20</i></div>
+    <div id="panel"><div id="panelHint">◀▲▼▶ GERAK · A: NGOBROL / PILIH · START: TAS</div></div>
+    <div class="brand" id="brand"><b>LUVI</b> GIRL<i>EDISI 20</i></div>
   </div>
   <div id="dpad">
     <button class="up" data-k="up" aria-label="Atas">▲</button>
@@ -526,13 +544,13 @@ const Layer = {
 function updateHUD() {
   const show = ['village', 'coop', 'gacha'].includes(sceneName);
   $('hud').classList.toggle('hide', !show);
-  $('hudCoin').textContent = 'KOIN ' + G.coins + '  KARTU ' + G.cards.length + '/' + DATA.kartu.length;
+  $('hudCoin').textContent = 'KOIN ' + G.coins + ' · KARTU ' + G.cards.length + '/' + DATA.kartu.length;
   let goal;
-  if (sceneName === 'coop') goal = '◀▶ pilih · A ketuk · B keluar';
+  if (sceneName === 'coop') goal = 'A ketuk · B keluar';
   else if (sceneName === 'gacha') goal = 'A putar · B keluar';
-  else if (!G.chick) goal = 'TUJUAN: Kandang Ayam';
-  else if (!G.legendary) goal = 'TUJUAN: Toko Gacha';
-  else goal = 'TUJUAN: Kastil Kue';
+  else if (!G.chick) goal = '▶ Kandang Ayam';
+  else if (!G.legendary) goal = '▶ Toko Gacha';
+  else goal = '▶ Kastil Kue';
   $('hudGoal').textContent = goal;
 }
 
@@ -1493,7 +1511,46 @@ function loop(now) {
   Input.pressed = {}; Pointer.tap = null;
   requestAnimationFrame(loop);
 }
+// Pilih bentuk konsol (mendatar/berdiri) yang layarnya paling besar, lalu kecilkan sampai pasti muat
+function placeOverlays(land) {
+  const scr = $('screen'), before = $('flash');
+  if (land) { scr.insertBefore($('hud'), before); scr.insertBefore($('dialog'), before); scr.insertBefore($('menu'), before); }
+  else { $('hudSlot').appendChild($('hud')); $('panel').appendChild($('dialog')); $('panel').appendChild($('menu')); }
+}
+function fitLayout(land) {
+  const dev = $('device'), kb = $('kb'), vw = innerWidth, vh = innerHeight;
+  dev.classList.toggle('land', land); kb.classList.toggle('hide', !land); placeOverlays(land);
+  dev.style.zoom = ''; dev.classList.remove('compact');
+  const tryFit = () => {
+    const floor = land ? 560 : (dev.classList.contains('compact') ? 290 : 350);
+    let w = Math.max(floor, Math.min(vw - 16, land ? 960 : 600)), total = 0;
+    for (let i = 0; i < 6; i++) {
+      dev.style.width = w + 'px';
+      total = dev.offsetHeight + (land ? kb.offsetHeight + 8 : 0) + 18;
+      if (total <= vh) break;
+      const nw = Math.max(floor, Math.floor(w - (total - vh) / 0.75) - 2);
+      if (nw >= w) break;
+      w = nw;
+    }
+    return {total, w};
+  };
+  let r = tryFit();
+  if (r.total > vh && !land) { dev.classList.add('compact'); r = tryFit(); }
+  let z = 1;
+  const tooWide = r.w + 16 > vw;
+  if (r.total > vh || tooWide) { z = Math.max(0.45, Math.min((vh - 4) / r.total, tooWide ? (vw - 8) / (r.w + 8) : 1)); dev.style.zoom = z; }
+  return $('screen').offsetWidth * z;
+}
+function fitDevice() {
+  const portrait = fitLayout(false);
+  if (innerWidth >= 520) { const land = fitLayout(true); if (land <= portrait) fitLayout(false); }
+}
+addEventListener('resize', fitDevice);
+fitDevice();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitDevice);
 window.__game = {get G() { return G; }, get scene() { return sceneName; }, get dialog() { return Dialog.active; }, get layer() { return Layer.active; }, get menu() { return Menu.active; }};
+$('brand').querySelector('b').textContent = DATA.nama.toUpperCase();
+$('brand').querySelector('i').textContent = 'EDISI ' + DATA.umur;
 setScene('title');
 requestAnimationFrame(loop);
 </script>
