@@ -74,29 +74,29 @@ PESAN_ANAK_AYAM = [
 # (kartu itu yang jadi kunci gerbang kastil). rarity: common / rare / epic / legendary
 KARTU_GACHA = [
     # 1. foto bertiga mirror selfie sebelum photobox
-    {"rarity": "common", "foto": "foto/kartu1.jpg",
+    {"rarity": "common", "foto": "foto/kartu1.jpeg",
      "judul": "Trio Pemanasan Photobox",
      "teks": "Belum masuk photobox, udah foto duluan di cermin. Namanya juga pemanasan. "
              "Efek kartu: kangen ketemuan +100."},
     # 2. foto masa kecil, tatapan "eits aku keren kan"
-    {"rarity": "rare", "foto": "foto/kartu2.jpg",
+    {"rarity": "rare", "foto": "foto/kartu2.jpeg",
      "judul": "Mini Luvi - Edisi Sok Keren",
      "teks": "Tatapan 'eits, aku keren kan?' ternyata udah ada dari kecil. "
              "Fix, percaya diri itu bawaan lahir."},
     # 3. foto aib lagi nahan ketawa
-    {"rarity": "epic", "foto": "foto/kartu3.jpg",
+    {"rarity": "epic", "foto": "foto/kartu3.jpeg",
      "judul": "Luvi - Mode Nahan Ketawa",
      "teks": "Foto langka hasil jepretan diam-diam. Ketawanya ditahan, tapi pipinya nggak bisa bohong. "
              "Kartu udah keluar, protes ditolak."},
     # 4. foto sekarang lagi jadi panitia (harus yang terakhir & legendary)
-    {"rarity": "legendary", "foto": "foto/kartu4.jpg",
+    {"rarity": "legendary", "foto": "foto/kartu4.jpeg",
      "judul": "Luvi Panitia - Edisi Legend",
      "teks": "Rundown di tangan, acara jalan, panitia lain tenang. "
              "Dapet rarity Legendary karena kerjanya emang legend."},
 ]
 
 # 5. foto pas ketemuan, Luvi umur 20 lagi senyum hepi
-FOTO_AKHIR = "foto/akhir.jpg"
+FOTO_AKHIR = "foto/akhir.jpeg"
 CAPTION_AKHIR = "Luvi Lettisia, resmi Level 20!"
 TEKS_AKHIR = ("Foto paling baru, langsung dari hari ini. Umur nambah, senyum kiyowo-nya tetap. "
               "Level hepi: MAKSIMAL.")
@@ -134,14 +134,27 @@ def _encode_photo(path_str: str, mtime: float) -> str:
     return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
+PHOTO_EXTS = [".jpeg", ".jpg", ".png", ".webp"]
+
+
+def find_photo(rel_path):
+    """Cari foto: nama persis dulu, lalu nama sama dengan ekstensi lain.
+    Dicari di folder yang ditulis (mis. foto/) dan juga di folder utama."""
+    rel = Path(rel_path)
+    names = [rel.name] + [rel.stem + e for e in PHOTO_EXTS if rel.stem + e != rel.name]
+    for name in names:
+        for folder in (APP_DIR / rel.parent, APP_DIR):
+            p = folder / name
+            if p.is_file():
+                return p
+    return None
+
+
 def photo_uri(rel_path):
     if not rel_path:
         return None
-    p = APP_DIR / rel_path
-    if not p.is_file():
-        # fallback: foto diupload langsung di folder utama (tanpa folder "foto/")
-        p = APP_DIR / Path(rel_path).name
-    if not p.is_file():
+    p = find_photo(rel_path)
+    if p is None:
         return None
     try:
         return _encode_photo(str(p), p.stat().st_mtime)
