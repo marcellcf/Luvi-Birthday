@@ -40,10 +40,11 @@ NPC = [
         "nama_lengkap": "Jessica Margaretha Olivia",
         "tampilan": "jessica",
         "pesan": [
-            "Happy birthday luvi",
-            "Panjang umur sehat selalu",
-            "Sukses terus",
-            "Msh eksperimen kan",
+            "Selamat anda sudah kepala 2",
+            "smakin tua",
+            "semoga kedepannya kmu bisa sukses terus, bahagia selalu,",
+            "dan apa yang kamu lakukan semua dijadikan berhasil",
+            "amin",
         ],
     },
     {
@@ -52,9 +53,11 @@ NPC = [
         "tampilan": "adek",
         "pesan": [
             "Happy birthday ce luvi!!",
-            "Panjang umur sehat selalu",
-            "Makin sukses terus ya ce",
-            "Traktirannya jangan lupa hehe",
+            "Semoga jadi cece yang baik dan nggak suka ngebully adeknya",
+            "Stop jadi cece yang jahat ya ce. Adek udah cukup menderita",
+            "Hehe bercanda... dikit",
+            "Makasih udah jadi cece yang seru, semoga makin sehat dan makin bahagia",
+            "Tahun ini jadi cece yang baik ya. Janji?",
         ],
     },
 ]
@@ -64,28 +67,39 @@ PESAN_ANAK_AYAM = [
     "Selamat ulang tahun ke-20, Luvi! Aku anak ayam pertama yang ngucapin!",
     "Semoga makin bahagia, makin sehat, makin bersinar kayak telur emas.",
     "Kata induk ayam, kamu orangnya baik banget. Aku setuju. Ciap!",
-    "Jangan lupa traktir ya. Biji jagung juga boleh kok.",
+    "Jangan lupa traktir ya. Biji jagung juga boleh kok. Ciap!",
 ]
 
 # Kartu gacha, urut dari yang pertama keluar. Yang terakhir HARUS legendary
 # (kartu itu yang jadi kunci gerbang kastil). rarity: common / rare / epic / legendary
 KARTU_GACHA = [
+    # 1. foto bertiga mirror selfie sebelum photobox
     {"rarity": "common", "foto": "foto/kartu1.jpg",
-     "judul": "Luvi - Mode Panitia",
-     "teks": "Rundown di tangan, senyum di muka. Sibuk tapi tetap santai."},
+     "judul": "Trio Pemanasan Photobox",
+     "teks": "Belum masuk photobox, udah foto duluan di cermin. Namanya juga pemanasan. "
+             "Efek kartu: kangen ketemuan +100."},
+    # 2. foto masa kecil, tatapan "eits aku keren kan"
     {"rarity": "rare", "foto": "foto/kartu2.jpg",
-     "judul": "Luvi - Kobid ARTMAX",
-     "teks": "Koordinator yang paling bisa diandelin. Jaket merahnya bikin auto keliatan bos."},
+     "judul": "Mini Luvi - Edisi Sok Keren",
+     "teks": "Tatapan 'eits, aku keren kan?' ternyata udah ada dari kecil. "
+             "Fix, percaya diri itu bawaan lahir."},
+    # 3. foto aib lagi nahan ketawa
     {"rarity": "epic", "foto": "foto/kartu3.jpg",
-     "judul": "Luvi - Senyum Andalan",
-     "teks": "Efek kartu: semua orang di sekitarnya ikut senyum. +100 mood."},
+     "judul": "Luvi - Mode Nahan Ketawa",
+     "teks": "Foto langka hasil jepretan diam-diam. Ketawanya ditahan, tapi pipinya nggak bisa bohong. "
+             "Kartu udah keluar, protes ditolak."},
+    # 4. foto sekarang lagi jadi panitia (harus yang terakhir & legendary)
     {"rarity": "legendary", "foto": "foto/kartu4.jpg",
-     "judul": "Luvi Lettisia - Edisi 20 Tahun",
-     "teks": "Kartu paling langka di dunia. Cuma ada satu, dan hari ini dia ulang tahun."},
+     "judul": "Luvi Panitia - Edisi Legend",
+     "teks": "Rundown di tangan, acara jalan, panitia lain tenang. "
+             "Dapet rarity Legendary karena kerjanya emang legend."},
 ]
 
+# 5. foto pas ketemuan, Luvi umur 20 lagi senyum hepi
 FOTO_AKHIR = "foto/akhir.jpg"
-CAPTION_AKHIR = "Luvi Lettisia, Level 20"
+CAPTION_AKHIR = "Luvi Lettisia, resmi Level 20!"
+TEKS_AKHIR = ("Foto paling baru, langsung dari hari ini. Umur nambah, senyum kiyowo-nya tetap. "
+              "Level hepi: MAKSIMAL.")
 
 SURAT = """Ce Luvi,
 
@@ -93,9 +107,9 @@ Happy birthday yang ke-20!
 
 Makasih udah jadi cece yang seru, sabar, dan selalu bisa diandelin. Semoga di umur yang baru ini cece makin sehat, makin bahagia, dan semua yang lagi diperjuangin satu-satu kesampaian.
 
-Tetap jadi Luvi yang kayak gini ya.
+Tetap jadi Luvi yang kayak gini ya. Tapi versi yang nggak suka ngebully adek.
 
-Traktirannya jangan lupa. Hehe."""
+Hehe."""
 # ==================================================================
 
 
@@ -154,6 +168,7 @@ def build_data() -> dict:
         ],
         "fotoAkhir": photo_uri(FOTO_AKHIR),
         "captionAkhir": CAPTION_AKHIR,
+        "teksAkhir": TEKS_AKHIR,
         "surat": SURAT.strip(),
     }
 
