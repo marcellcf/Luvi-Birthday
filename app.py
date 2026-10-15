@@ -31,7 +31,7 @@ import streamlit.components.v1 as components
 NAMA = "Luvi"
 NAMA_LENGKAP = "Luvi Lettisia"
 UMUR = 20
-PENGIRIM = "Adek"   # muncul di tanda tangan surat & credits
+PENGIRIM = "Jessica & Adek"   # muncul di tanda tangan surat & credits
 
 # NPC di desa. "tampilan" pilih "jessica" atau "adek" (bentuk karakternya).
 NPC = [
@@ -101,15 +101,15 @@ CAPTION_AKHIR = "Luvi Lettisia, resmi Level 20!"
 TEKS_AKHIR = ("Foto paling baru, langsung dari hari ini. Umur nambah, senyum kiyowo-nya tetap. "
               "Level hepi: MAKSIMAL.")
 
-SURAT = """Ce Luvi,
+SURAT = """Luvi,
 
 Happy birthday yang ke-20!
 
-Makasih udah jadi cece yang seru, sabar, dan selalu bisa diandelin. Semoga di umur yang baru ini cece makin sehat, makin bahagia, dan semua yang lagi diperjuangin satu-satu kesampaian.
+Makasih udah jadi temen yang seru, sabar, dan selalu bisa diandelin. Semoga di umur yang baru ini kamu makin sehat, makin bahagia, dan semua yang lagi kamu perjuangin satu-satu kesampaian.
 
-Tetap jadi Luvi yang kayak gini ya. Tapi versi yang nggak suka ngebully adek.
+Makasih juga buat semua ketawa, cerita, dan momen-momen random kita bertiga. Semoga tahun ini makin banyak ketemuan dan photobox-an lagi.
 
-Hehe."""
+Tetap jadi Luvi yang kita kenal ya. Sayang kamu!"""
 # ==================================================================
 
 
