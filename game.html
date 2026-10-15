@@ -225,7 +225,7 @@ const DEMO = {
     {nama: 'Jessica', namaLengkap: 'Jessica', tampilan: 'jessica', pesan: ['Happy birthday!']},
     {nama: 'Adek', namaLengkap: 'Adek', tampilan: 'adek', pesan: ['Happy birthday!']}
   ],
-  telur: ['Ciap! Selamat ulang tahun!', 'Semoga bahagia selalu!', 'Sehat terus ya!', 'Jangan lupa traktir!'],
+  telur: ['Ciap! Selamat ulang tahun!', 'Semoga bahagia selalu!', 'Sehat terus ya!', 'Bahagia terus ya!'],
   kartu: [
     {rarity: 'common', judul: 'Kartu Common', teks: 'Contoh kartu.', foto: null},
     {rarity: 'rare', judul: 'Kartu Rare', teks: 'Contoh kartu.', foto: null},
@@ -1428,7 +1428,7 @@ SCENES.ending = {
     if (s === 0) { setTitle('SELAMAT ULANG TAHUN', DATA.namaLengkap.toUpperCase(), 'KE-' + DATA.umur + ' ♥', 'TEKAN A', true); this.waitA = true; }
     else if (s === 1) {
       $('title').classList.add('hide'); this.waitA = false;
-      openCard({rarity: 'special', judul: DATA.captionAkhir, teks: '', foto: DATA.fotoAkhir}, false, () => this.next());
+      openCard({rarity: 'special', judul: DATA.captionAkhir, teks: DATA.teksAkhir || '', foto: DATA.fotoAkhir}, false, () => this.next());
     } else if (s === 2) this.openLetter();
     else if (s === 3) this.openCredits();
     else { G = freshState(); SCENES.coop.init = false; go('title'); }
